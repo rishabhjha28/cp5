@@ -19,32 +19,35 @@ mongoose.connect(process.env.DATABASE,
         else{
             console.log("connected to database")
         }
-});   
-const studentScheme = new mongoose.Schema({
-    first_name:{
-        type:String,
-        required:true
-    },
-    last_name:{
-        type:String,
-        required:true
-    },
-    email_id:{
-        type:String,
-        required:true
-    },
-    is_paid:{
-        type:Boolean,
-        default:false
+    });   
+    const studentScheme = new mongoose.Schema({
+        first_name:{
+            type:String,
+            required:true
+        },
+        last_name:{
+            type:String,
+            required:true
+        },
+        email_id:{
+            type:String,
+            required:true
+        },
+        is_paid:{
+            type:Boolean,
+            default:false
     }    
 })
 const Student = mongoose.model("Student",studentScheme)
+if(process.env.NODE_ENV=="prodeuction"){
+    app.use(express.static('client/build'))
+}
 app.post('/students',(req,res)=>{
     const studentData = new Student(req.body)
     studentData.save()
     .then(item => {
         res.json({msg:"item saved to database"});
-        })
+    })
         .catch(err => {
             console.log(err)
         res.status(400).send("unable to save to database");
@@ -71,9 +74,6 @@ app.put('/students',(req,res)=>{
     })
 })
 
-if(process.env.NODE_ENV=="prodeuction"){
-    app.use(express.static('client/build'))
-}
 
 const port = process.env.PORT || 30001  
 app.listen(port, () => {
