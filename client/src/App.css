@@ -1,0 +1,46 @@
+.homePage{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.homePage form{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.homePage form input{
+    margin: 10px;
+    padding: 5px;
+    outline: none;
+    border-radius: 5px;
+}
+.homePage form button{
+    cursor: pointer;
+    padding: 5px;
+    margin:10px;
+    outline: none;
+}
+.dashboard{
+    margin-top: 50px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    flex-direction: column;
+}
+.filter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.input input{
+    padding: 5px;
+    outline: none;
+    border-radius: 5px;
+    margin-left: 5vw;
+}
