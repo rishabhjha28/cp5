@@ -69,7 +69,7 @@ export const Dashboard = () => {
             if(i === 0){
                 continue;
             }
-            else if((filter === "none" || filter === studentData.data[i].is_paid) &&((studentData.data[i].first_name+ " " +studentData.data[i].last_name).includes(search) || studentData.data[i].email_id.includes(search))){
+            else if((filter === "none" || filter === studentData.data[i].is_paid) &&((studentData.data[i].first_name+ " " +studentData.data[i].last_name).toLowerCase().includes(search.toLowerCase()) || studentData.data[i].email_id.toLowerCase().includes(search.toLowerCase()))){
                 rows.push({
                     name:studentData.data[i].first_name+ " " +studentData.data[i].last_name,
                     email_id:studentData.data[i].email_id,
