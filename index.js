@@ -40,7 +40,7 @@ mongoose.connect(process.env.DATABASE,
 })
 const Student = mongoose.model("Student",studentScheme)
 
-app.post('students',(req,res)=>{
+app.post('/students',(req,res)=>{
     const studentData = new Student(req.body)
     studentData.save()
     .then(item => {
@@ -52,7 +52,7 @@ app.post('students',(req,res)=>{
         });
 })
 
-app.get('students',async (req,res)=>{
+app.get('/students',async (req,res)=>{
     // console.log("I got called")
     const {page,limit} = req.query
     const totalElement = await Student.countDocuments()
@@ -60,7 +60,7 @@ app.get('students',async (req,res)=>{
     const data = await Student.find({},null,{skip:parseInt(page-1)*limit,limit:limit})
     res.json([{totalElement:totalElement},...data])
 })
-app.put('students',(req,res)=>{
+app.put('/students',(req,res)=>{
     const {id} = req.body
     Student.findByIdAndUpdate(id,{is_paid:true},(err)=>{
         if(err){
