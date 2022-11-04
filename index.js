@@ -70,9 +70,6 @@ app.put('/students',(req,res)=>{
         }
     })
 })
-app.get('/', (req, res) => {
-    res.json({name:"shreeram"})
-})
 
 if(process.env.NODE_ENV=="prodeuction"){
     app.use(express.static('client/build'))
