@@ -2,14 +2,14 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import axios from 'axios'
 
 
-// const link = 'http://localhost:30001/'
+const link = 'http://localhost:30001/'
 
 const fetchStudents = createAsyncThunk(
     'students/fetchStudents',
     async (payload) =>
       await axios
         .get(
-          `students?page=${payload.page}&limit=${payload.limit}`
+          `${link}students?page=${payload.page}&limit=${payload.limit}`
         )
         .then((response) => {
             // console.log(response.data)
@@ -25,7 +25,7 @@ const updateStudent = createAsyncThunk(
     'students/updateStudents',
     async(payload)=>{
         await axios
-        .put('students',payload)
+        .put(link+'students',payload)
     }
 )
 
@@ -33,7 +33,7 @@ const addStudent = createAsyncThunk(
     'students/addStudent',
     async(payload)=>{
         await axios
-        .post('students',payload)
+        .post(link+'students',payload)
     }
 )
 
