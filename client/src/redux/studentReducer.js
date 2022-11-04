@@ -9,7 +9,7 @@ const fetchStudents = createAsyncThunk(
     async (payload) =>
       await axios
         .get(
-          `students?page=${payload.page}&limit=${payload.limit}`
+          `/students?page=${payload.page}&limit=${payload.limit}`
         )
         .then((response) => {
             // console.log(response.data)
@@ -25,7 +25,7 @@ const updateStudent = createAsyncThunk(
     'students/updateStudents',
     async(payload)=>{
         await axios
-        .put('students',payload)
+        .put('/students',payload)
     }
 )
 
@@ -33,7 +33,7 @@ const addStudent = createAsyncThunk(
     'students/addStudent',
     async(payload)=>{
         await axios
-        .post('students',payload)
+        .post('/students',payload)
     }
 )
 
