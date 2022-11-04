@@ -39,23 +39,15 @@ mongoose.connect(process.env.DATABASE,
         }    
     })
     const Student = mongoose.model("Student",studentScheme)
-    if(process.env.NODE_ENV=="production"){
-        app.use(express.static('client/build'))
-        const path = require('path')
-        app.get("*",(req,res)=>{
-            res.sendFile(path.resolve(__dirname,'client','build','index.html'))
-        })
-    }
-    
     app.post('/students',(req,res)=>{
         const studentData = new Student(req.body)
         studentData.save()
-    .then(item => {
-        res.json({msg:"item saved to database"});
+        .then(item => {
+            res.json({msg:"item saved to database"});
     })
     .catch(err => {
             console.log(err)
-        res.status(400).send("unable to save to database");
+            res.status(400).send("unable to save to database");
         });
 })
 
@@ -67,6 +59,7 @@ app.get('/students',async (req,res)=>{
     const data = await Student.find({},null,{skip:parseInt(page-1)*limit,limit:limit})
     res.json([{totalElement:totalElement},...data])
 })
+
 app.put('/students',(req,res)=>{
     const {id} = req.body
     Student.findByIdAndUpdate(id,{is_paid:true},(err)=>{
@@ -79,6 +72,13 @@ app.put('/students',(req,res)=>{
     })
 })
 
+if(process.env.NODE_ENV=="production"){
+    app.use(express.static('client/build'))
+    const path = require('path')
+    app.get("*",(req,res)=>{
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+    })
+}
 
 
 const port = process.env.PORT || 30001  
