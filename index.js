@@ -36,13 +36,16 @@ mongoose.connect(process.env.DATABASE,
         is_paid:{
             type:Boolean,
             default:false
-    }    
-})
-const Student = mongoose.model("Student",studentScheme)
-
-app.post('/students',(req,res)=>{
-    const studentData = new Student(req.body)
-    studentData.save()
+        }    
+    })
+    const Student = mongoose.model("Student",studentScheme)
+    if(process.env.NODE_ENV=="production"){
+        app.use(express.static('client/build'))
+    }
+    
+    app.post('/students',(req,res)=>{
+        const studentData = new Student(req.body)
+        studentData.save()
     .then(item => {
         res.json({msg:"item saved to database"});
     })
@@ -73,9 +76,6 @@ app.put('/students',(req,res)=>{
 })
 
 
-if(process.env.NODE_ENV=="production"){
-    app.use(express.static('client/build'))
-}
 
 const port = process.env.PORT || 30001  
 app.listen(port, () => {
